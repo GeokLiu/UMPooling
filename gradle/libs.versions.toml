@@ -1,38 +1,37 @@
 [versions]
+# Core Plugins & Tools
 agp = "8.7.2"
-kotlin = "2.0.0"
-coreKtx = "1.13.1"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
-appcompat = "1.7.0"
-material = "1.12.0"
-activityKtx = "1.9.3"
-constraintlayout = "2.2.0"
-supabase = "3.0.1"
-ktor = "3.0.0"
-kotlinxSerialization = "1.6.3"
+kotlin = "2.0.21"
+coreKtx = "1.15.0"
+
+# Supabase & Networking
+supabase = "3.0.1" # Latest stable v3 BOM release
+ktor = "3.0.1"
+kotlinxSerialization = "1.7.3"
 
 [libraries]
+# AndroidX & UI Dependencies
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
-androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.7.0" }
+material = { group = "com.google.android.material", name = "material", version = "1.12.0" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version = "2.2.0" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version = "1.9.3" }
 
 # Supabase SDK Modules
-supabase-bom = { module = "io.github.jan-tennert.supabase:bom", version.ref = "supabase" }
-supabase-postgrest = { module = "io.github.jan-tennert.supabase:postgrest-kt" }
-supabase-auth = { module = "io.github.jan-tennert.supabase:auth-kt" }
-supabase-functions = { module = "io.github.jan-tennert.supabase:functions-kt" }
-supabase-realtime = { module = "io.github.jan-tennert.supabase:realtime-kt" }
+supabase-bom = { group = "io.github.jan-tennert.supabase", name = "bom", version.ref = "supabase" }
+supabase-postgrest = { group = "io.github.jan-tennert.supabase", name = "postgrest-kt" }
+supabase-auth = { group = "io.github.jan-tennert.supabase", name = "auth-kt" }
+supabase-functions = { group = "io.github.jan-tennert.supabase", name = "functions-kt" }
+supabase-realtime = { group = "io.github.jan-tennert.supabase", name = "realtime-kt" }
 
-# Ktor Network Engine & Serialization
-ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+# Ktor Engine & Kotlinx Serialization
+ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+
+# Testing
+junit = { group = "junit", name = "junit", version = "4.13.2" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version = "1.2.1" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version = "3.6.1" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

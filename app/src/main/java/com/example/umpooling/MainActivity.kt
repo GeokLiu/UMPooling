@@ -1,36 +1,34 @@
 package com.example.umpooling
 
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
-import com.example.umpooling.repository.RideRepository
-import kotlinx.coroutines.launch
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.auth.Auth
+import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.functions.Functions
+import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.realtime.Realtime
+
+// Singleton object to hold the Supabase client
+object SupabaseProvider {
+    val client: SupabaseClient by lazy {
+        createSupabaseClient(
+            supabaseUrl = "https://trzzdcsfpsdlxxwvuufx.supabase.co",
+            supabaseKey = "sb_publishable_7DP5uU9B6vMjqIX-iHdDgA_FeI1Vp0K"
+        ) {
+            install(Auth)
+            install(Postgrest)
+            install(Realtime)
+            install(Functions)
+        }
+    }
+}
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        // Test Supabase connection
-        lifecycleScope.launch {
-            try {
-                val repository = RideRepository()
-                val trips = repository.fetchActiveTrips()
-                Log.d("UMPooling_Supabase", "Successfully connected! Fetched ${trips.size} trips.")
-            } catch (e: Exception) {
-                Log.e("UMPooling_Supabase", "Failed to connect to Supabase", e)
-            }
-        }
+        // Access Supabase anywhere using: SupabaseProvider.client
     }
 }
